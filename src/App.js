@@ -19,7 +19,10 @@ export default () => {
         Math.random() * (originals[0].items.results.length - 1)
       );
       let chosen = originals[0].items.results[randomChosen];
+      let chosenInfo = await Tmdb.getMovieInfo(chosen.id, "tv");
+      setFeatureData(chosenInfo);
     };
+
     loadAll();
   }, []);
   return (

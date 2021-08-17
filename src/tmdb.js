@@ -1,57 +1,92 @@
+/* eslint-disable default-case */
 /* eslint-disable import/no-anonymous-default-export */
-const API_KEY='7dbc57d93c5a6abfbeaaa5ad46919034';
-const API_BASE = 'https://api.themoviedb.org/3'
-
+const API_KEY = "7dbc57d93c5a6abfbeaaa5ad46919034";
+const API_BASE = "https://api.themoviedb.org/3";
 
 const apiListFetch = async (endpoint) => {
-    const req = await fetch(`${API_BASE}${endpoint}`)
-    const json = await req.json();
-    return json;
-}
+  const req = await fetch(`${API_BASE}${endpoint}`);
+  const json = await req.json();
+  return json;
+};
 
 export default {
-    getHomeList: async () => {
-        return [
-            {
-                slug: 'originals',
-                title: 'Originais do Netflix',
-                items: await apiListFetch(`/discover/tv?with_network=213&language=pt-BR&api_key=${API_KEY}`)
-            },
-            {
-                slug:'trending',
-                title: 'Recomendados para Você',
-                items: await apiListFetch(`/trending/all/week?language=pt-BR&api_key=${API_KEY}`)
-            },
-            {
-                slug:'toprated',
-                title: 'Em Alta',
-                items: await apiListFetch(`/movie/top_rated?language-pt-BR&api_key=${API_KEY}`)
-            },
-            {
-                slug:'action',
-                title: 'Ação',
-                items: await apiListFetch(`/discover/movie?with_genres=28&language=pt-BR&api_key=${API_KEY}`)
-            },
-            {
-                slug:'comedy',
-                title: 'Comédia',
-                items: await apiListFetch(`/discover/movie?with_genres=35&language=pt-BR&api_key=${API_KEY}`)
-            },
-            {
-                slug:'horror',
-                title: 'Terror',
-                items: await apiListFetch(`/discover/movie?with_genres=27&language=pt-BR&api_key=${API_KEY}`)
-            },
-            {
-                slug:'romance',
-                title: 'Romance',
-                items: await apiListFetch(`/discover/movie?with_genres=10749&language=pt-BR&api_key=${API_KEY}`)
-            },
-            {
-                slug:'documentary',
-                title: 'Documentarios',
-                items: await apiListFetch(`/discover/movie?with_genres=99&language=pt-BR&api_key=${API_KEY}`)
-            }
-        ]
+  getHomeList: async () => {
+    return [
+      {
+        slug: "originals",
+        title: "Originais do Netflix",
+        items: await apiListFetch(
+          `/discover/tv?with_network=213&language=pt-BR&api_key=${API_KEY}`
+        ),
+      },
+      {
+        slug: "trending",
+        title: "Recomendados para Você",
+        items: await apiListFetch(
+          `/trending/all/week?language=pt-BR&api_key=${API_KEY}`
+        ),
+      },
+      {
+        slug: "toprated",
+        title: "Em Alta",
+        items: await apiListFetch(
+          `/movie/top_rated?language-pt-BR&api_key=${API_KEY}`
+        ),
+      },
+      {
+        slug: "action",
+        title: "Ação",
+        items: await apiListFetch(
+          `/discover/movie?with_genres=28&language=pt-BR&api_key=${API_KEY}`
+        ),
+      },
+      {
+        slug: "comedy",
+        title: "Comédia",
+        items: await apiListFetch(
+          `/discover/movie?with_genres=35&language=pt-BR&api_key=${API_KEY}`
+        ),
+      },
+      {
+        slug: "horror",
+        title: "Terror",
+        items: await apiListFetch(
+          `/discover/movie?with_genres=27&language=pt-BR&api_key=${API_KEY}`
+        ),
+      },
+      {
+        slug: "romance",
+        title: "Romance",
+        items: await apiListFetch(
+          `/discover/movie?with_genres=10749&language=pt-BR&api_key=${API_KEY}`
+        ),
+      },
+      {
+        slug: "documentary",
+        title: "Documentarios",
+        items: await apiListFetch(
+          `/discover/movie?with_genres=99&language=pt-BR&api_key=${API_KEY}`
+        ),
+      },
+    ];
+  },
+  getMovieInfo: async (movieId, type) => {
+    let info = {};
+
+    if (movieId) {
+      switch (type) {
+        case "movie":
+          info = await apiListFetch(
+            `/movie/${movieId}?language=pt-BR&api_key=${API_KEY}`
+          );
+          break;
+        case "tv":
+          info = await apiListFetch(
+            `/tv/${movieId}?language=pt-BR&api_key=${API_KEY}`
+          );
+          break;
+      }
+      return info;
     }
-}
+  },
+};
