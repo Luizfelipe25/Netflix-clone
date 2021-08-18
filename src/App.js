@@ -51,6 +51,13 @@ export default () => {
           <MovieRow key={key} title={item.title} items={item.items} />
         ))}
       </section>
+      <footer>
+        Themoviedb.org
+        <br />
+        Direitos de imagem para Netflix
+        <br />
+        LuizFelipe25
+      </footer>
     </div>
   );
 };
